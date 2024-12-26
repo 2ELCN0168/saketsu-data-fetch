@@ -25,7 +25,7 @@ function _help()
         printf "%b" "${R} -h         ${N}  Display help\n"
         printf "%b" "${R} -i         ${N}  No system informations\n"
         printf "%b" "${R} -k         ${N}  No docker containers\n"
-        printf "%b" "${R} -l ${N}[40-200]  Maximum line length\n"
+        printf "%b" "${R} -l ${N}[50-300]  Maximum line length\n"
         printf "%b" "${R} -s         ${N}  No services\n"
 }
 
@@ -58,8 +58,8 @@ function main()
 
         [[ "${opt_c}" -ne 1 ]] && _colors
         [[ "${opt_h}" -eq 1 ]] && _help && exit 0
-        if [[ "${max_limit}" -lt 40 || "${max_limit}" -gt 300 ]]; then
-                printf "%b" "${R}Total line length must be between 40 and 300.\n${N}"
+        if [[ "${max_limit}" -lt 50 || "${max_limit}" -gt 300 ]]; then
+                printf "%b" "${R}Total line length must be between 50 and 300.\n${N}"
                 exit 1
         fi
 
