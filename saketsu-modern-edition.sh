@@ -7,45 +7,49 @@
 function _themes()
 {
         if [[ "${1}" == "normal" ]]; then
-                C1='\033[91m'  # RED 
-                C2='\033[92m'  # GREEN
-                C3='\033[93m'  # YELLOW
-                C4='\033[94m'  # BLUE
-                C5='\033[95m'  # PINK
-                C6='\033[96m'  # CYAN
-                C7='\033[97m'  # WHITE
-                N='\033[0m'    # RESET
+                C0='\033[90m'     # DIM
+                C1='\033[91m'     # RED
+                C2='\033[92m'     # GREEN
+                C3='\033[93m'     # YELLOW
+                C4='\033[94m'     # BLUE
+                C5='\033[95m'     # PINK
+                C6='\033[96m'     # CYAN
+                C7='\033[97m'     # WHITE
+                N='\033[0m'       # RESET
                 B2='\033[30;102m' # BG GREEN
         elif [[ "${1}" == "modern" ]]; then
-                C1='\033[92m'  # GREEN 
-                C2='\033[92m'  # GREEN
-                C3='\033[92m'  # GREEN 
-                C4='\033[0m'   # NO COLOR
-                C5='\033[0m'   # NO COLOR 
-                C6='\033[0m'   # NO COLOR 
-                C7='\033[0m'   # NO COLOR
-                N='\033[0m'    # RESET
+                C0='\033[90m'     # DIM
+                C1='\033[92m'     # GREEN
+                C2='\033[92m'     # GREEN
+                C3='\033[92m'     # GREEN
+                C4='\033[0m'      # NO COLOR
+                C5='\033[0m'      # NO COLOR
+                C6='\033[0m'      # NO COLOR
+                C7='\033[0m'      # NO COLOR
+                N='\033[0m'       # RESET
                 B2='\033[30;102m' # BG GREEN
         elif [[ "${1}" == "saketsu" ]]; then
-                C1='\033[91m'  # RED 
-                C2='\033[91m'  # RED
-                C3='\033[91m'  # RED 
-                C4='\033[31m'  # DARK RED
-                C5='\033[31m'  # DARK RED 
-                C6='\033[31m'  # DARK RED
-                C7='\033[97m'  # WHITE
-                N='\033[0m'    # RESET
+                C0='\033[90m'     # DIM
+                C1='\033[91m'     # RED
+                C2='\033[91m'     # RED
+                C3='\033[91m'     # RED
+                C4='\033[31m'     # DARK RED
+                C5='\033[31m'     # DARK RED
+                C6='\033[31m'     # DARK RED
+                C7='\033[97m'     # WHITE
+                N='\033[0m'       # RESET
                 B2='\033[30;102m' # BG GREEN
         elif [[ "${1}" == "aquatic" ]]; then
-                C1='\033[96m'  # CYAN 
-                C2='\033[94m'  # BLUE
-                C3='\033[96m'  # CYAN 
-                C4='\033[94m'  # BLUE
-                C5='\033[96m'  # CYAN 
-                C6='\033[96m'  # CYAN
-                C7='\033[97m'  # WHITE
-                N='\033[0m'    # RESET
-                B2='\033[30;106m' # BG CYAN 
+                C0='\033[90m'     # DIM
+                C1='\033[96m'     # CYAN
+                C2='\033[94m'     # BLUE
+                C3='\033[96m'     # CYAN
+                C4='\033[94m'     # BLUE
+                C5='\033[96m'     # CYAN
+                C6='\033[96m'     # CYAN
+                C7='\033[97m'     # WHITE
+                N='\033[0m'       # RESET
+                B2='\033[30;106m' # BG CYAN
         fi
 }
 
@@ -97,21 +101,21 @@ function main()
 
         while getopts "ab:cdhikl:L:nt:sSZ" opt; do
                 case "${opt}" in
-                        a) opt_a=1 ;;
-                        b) opt_b=1 && banner_title="${OPTARG}" ;;
-                        c) opt_c=1 ;;
-                        d) opt_d=1 ;;
-                        h) opt_h=1 ;;
-                        i) opt_i=1 ;;
-                        k) opt_k=1 ;;
-                        l) tabstop_1="${OPTARG}" ;;
-                        L) tabstop_2="${OPTARG}" ;;
-                        n) opt_n=1 ;;
-                        t) theme="${OPTARG}" ;;
-                        s) opt_s=1 ;;
-                        S) opt_S=1 ;;
-                        Z) opt_Z=1 ;;
-                        ?) opt_h=1 ;;
+                a) opt_a=1 ;;
+                b) opt_b=1 && banner_title="${OPTARG}" ;;
+                c) opt_c=1 ;;
+                d) opt_d=1 ;;
+                h) opt_h=1 ;;
+                i) opt_i=1 ;;
+                k) opt_k=1 ;;
+                l) tabstop_1="${OPTARG}" ;;
+                L) tabstop_2="${OPTARG}" ;;
+                n) opt_n=1 ;;
+                t) theme="${OPTARG}" ;;
+                s) opt_s=1 ;;
+                S) opt_S=1 ;;
+                Z) opt_Z=1 ;;
+                ?) opt_h=1 ;;
                 esac
         done
 
@@ -179,7 +183,7 @@ function main()
         if [[ "${opt_d}" -ne 1 ]]; then
                 printf "%b" "Filesystems informations\n"
                 display_fs_usage "${C2}" "${C6}" \
-                "$((tabstop_2 - 35))" "${tabstop_2}"
+                        "$((tabstop_2 - 35))" "${tabstop_2}"
                 printf "%b" "\n"
                 display_disks_temp "${C2}" "${B2}"
                 printf "%b" "\n"
@@ -192,7 +196,7 @@ function main()
 
         # Docker informations
         if [[ "${opt_k}" -ne 1 ]]; then
-                docker_function 
+                docker_function
         fi
 }
 
@@ -201,7 +205,7 @@ function main()
 function data_line()
 {
         # Usage: data_line "label" "data" "first_color" "second_color" "tabstop"
-        
+
         local label data tabstop_1 dots_length
 
         label="${1}"
@@ -222,12 +226,12 @@ function data_line()
 function anonymize_data()
 {
         # Usage: var=$(anonymize_data "${var}")
-        
+
         local input_data random_seq
         input_data="${1}"
 
-        random_seq="$(head -c 12 /dev/urandom | od -An -t x1 | tr -d ' \n' |
-        head -c ${#input_data})"
+        random_seq="$(head -c 12 /dev/urandom | od -An -t x1 | tr -d ' \n' \
+                | head -c ${#input_data})"
 
         printf "%s" "${random_seq}"
 }
@@ -237,10 +241,10 @@ function anonymize_data()
 function display_hostname()
 {
         local _hostname
-        _hostname="$(command cat /etc/hostname)"
+        _hostname="$(command cat "/etc/hostname")"
 
         if [[ "${opt_a}" -eq 1 ]]; then
-                _hostname="$(anonymize_data ${_hostname})"
+                _hostname="$(anonymize_data "${_hostname}")"
         fi
 
         data_line "Hostname" "${_hostname}" "${1}" "${2}" "${3}"
@@ -249,8 +253,8 @@ function display_hostname()
 function display_distribution()
 {
         local pretty_name
-        pretty_name="$(command cat /etc/os-release | 
-        awk -F '=' '/PRETTY_NAME/ { print $2 }' | tr -d '"')"
+        pretty_name="$(command cat /etc/os-release \
+                | awk -F '=' '/PRETTY_NAME/ { print $2 }' | tr -d '"')"
 
         data_line "Distribution" "${pretty_name}" "${1}" "${2}" "${3}"
 }
@@ -261,7 +265,7 @@ function display_kernel()
         kernel_version="$(command uname -s) $(command uname -r)"
 
         if [[ "${opt_a}" -eq 1 ]]; then
-                kernel_version="$(anonymize_data ${kernel_version})"
+                kernel_version="$(anonymize_data "${kernel_version}")"
         fi
 
         data_line "Kernel" "${kernel_version}" "${1}" "${2}" "${3}"
@@ -272,7 +276,7 @@ function display_installed_packages()
         local pkg_mgr pkg_nb
         local pkg_fpk pkg_fpk_nb
         local computed_msg
-        
+
         # Distribution package manager
         if [[ $(command -v pacman) ]]; then
                 pkg_mgr="(pacman)"
@@ -307,8 +311,8 @@ function display_cpu()
         [[ -f "/proc/cpuinfo" ]] || return
 
         local cpu_model
-        cpu_model="$(command cat /proc/cpuinfo |
-        awk -F ': ' '/model name/ { print $2; exit }')"
+        cpu_model="$(command cat /proc/cpuinfo \
+                | awk -F ': ' '/model name/ { print $2; exit }')"
 
         data_line "CPU" "${cpu_model}" "${1}" "${2}" "${3}"
 }
@@ -319,8 +323,8 @@ function display_memory()
 
         local mem_available mem_used mem_total
 
-        mem_available="$(grep -i 'MemAvailable' /proc/meminfo |
-        awk '{ print $2 }')"
+        mem_available="$(grep -i 'MemAvailable' /proc/meminfo \
+                | awk '{ print $2 }')"
         mem_total="$(grep -i 'MemTotal' /proc/meminfo | awk '{ print $2 }')"
 
         mem_used="$(awk "BEGIN { 
@@ -340,7 +344,7 @@ function display_memory()
         mem_total="${2}Total: ${1}${mem_total}${N}GB"
 
         data_line "Memory" "${mem_available}, ${mem_used}, ${mem_total}" \
-        "${1}" "${2}" "${3}"
+                "${1}" "${2}" "${3}"
 }
 
 function display_uptime()
@@ -352,13 +356,13 @@ function display_uptime()
 
 function display_load()
 {
-        local load_1 load_5 load_15 
-        load_1="${2}$(cat /proc/loadavg | cut -d ' ' -f 1)${N}"
-        load_5="${2}$(cat /proc/loadavg | cut -d ' ' -f 2)${N}"
-        load_15="${2}$(cat /proc/loadavg | cut -d ' ' -f 3)${N}"
+        local load_1 load_5 load_15
+        load_1="${2}$(cut -d ' ' -f 1 < "/proc/loadavg")${N}"
+        load_5="${2}$(cut -d ' ' -f 2 < "/proc/loadavg")${N}"
+        load_15="${2}$(cut -d ' ' -f 3 < "/proc/loadavg")${N}"
 
         data_line "Load" "${load_1}(1m), ${load_5}(5m), ${load_15}(15m)" \
-        "${1}" "${2}" "${3}"
+                "${1}" "${2}" "${3}"
 }
 
 function display_users_logged()
@@ -366,7 +370,7 @@ function display_users_logged()
         local _users
         _users="$(command who | wc -l)"
 
-data_line "Users logged" "${_users}" "${1}" "${2}" "${3}"
+        data_line "Users logged" "${_users}" "${1}" "${2}" "${3}"
 }
 
 ### Network functions ###
@@ -378,32 +382,33 @@ function display_inet_addresses()
         local interfaces ip
         interfaces=$(command ip -o link show | awk -F ': ' '{ print $2 }')
 
+        # I need the splitting below
         for ifname in ${interfaces[@]}; do
                 # Do not use virtual interfaces
                 if [[ "${ifname}" =~ ^veth.* ]]; then
                         continue
                 fi
-                
+
                 # IPv4
                 if [[ "${4}" == "4" ]]; then
-                        ip="$(command ip -${4} addr show ${ifname} |
-                        awk '/inet / { print $2 }' | cut -d '/' -f 1)"
+                        ip="$(command ip -"${4}" addr show "${ifname}" \
+                                | awk '/inet / { print $2 }' | cut -d '/' -f 1)"
                 # IPv6
                 elif [[ "${4}" == "6" ]]; then
-                        ip="$(command ip -${4} addr show ${ifname} |
-                        awk '/inet6 / { print $2 }' | cut -d '/' -f 1)"
+                        ip="$(command ip -"${4}" addr show "${ifname}" \
+                                | awk '/inet6 / { print $2 }' | cut -d '/' -f 1)"
                 fi
 
                 for i in ${ip}; do
                         data_line "IPv${4} (${ifname})" "${i}" \
-                        "${1}" "${2}" "${3}"
+                                "${1}" "${2}" "${3}"
                 done
         done
 }
 
 function display_internet_connection()
 {
-        [[ $(command -v ping) ]] || return 
+        [[ $(command -v ping) ]] || return
 
         local _ping
 
@@ -432,18 +437,18 @@ function display_usbguard()
 function display_rkhunter()
 {
         [[ $(command -v rkhunter) ]] || return
-        
+
         local rkhunter_last_update
 
         if [[ -f "/var/log/rkhunter.log" ]]; then
-                rkhunter_last_update="$(stat -c %y /var/log/rkhunter.log |
-                awk '{ print $1, $2 }' | cut -d '.' -f 1)"
+                rkhunter_last_update="$(stat -c %y "/var/log/rkhunter.log" \
+                        | awk '{ print $1, $2 }' | cut -d '.' -f 1)"
         else
                 rkhunter_last_update="Unknown"
         fi
 
         data_line "RKHunter" "Last update: ${rkhunter_last_update}" \
-        "${1}" "${2}" "${3}"
+                "${1}" "${2}" "${3}"
 }
 
 function display_passwds_encryption_method()
@@ -451,15 +456,15 @@ function display_passwds_encryption_method()
         [[ -f "/etc/login.defs" ]] || return
 
         local pw_encryption_method
-        pw_encryption_method="$(command cat /etc/login.defs |
-        awk '/^ENCRYPT_METHOD/ { print $2 }')"
+        pw_encryption_method="$(command cat "/etc/login.defs" \
+                | awk '/^ENCRYPT_METHOD/ { print $2 }')"
 
         if [[ "${opt_a}" -eq 1 ]]; then
-                pw_encryption_method="$(anonymize_data ${pw_encryption_method})"
+                pw_encryption_method="$(anonymize_data "${pw_encryption_method}")"
         fi
 
         data_line "Pw. Encryption" "${pw_encryption_method}" \
-        "${1}" "${2}" "${3}"
+                "${1}" "${2}" "${3}"
 }
 
 function display_drive_encryption()
@@ -471,12 +476,12 @@ function display_drive_encryption()
         encryption_method="crypto_LUKS"
 
         for i in $(lsblk -lpno NAME); do
-                disk_blkid="$(blkid ${i})"
+                disk_blkid="$(blkid "${i}")"
                 if [[ "${disk_blkid}" =~ ${encryption_method} ]]; then
-                        device_name="$(echo ${i} | cut -d ' ' -f 1 | tr -d ':')"
+                        device_name="$(echo "${i}" | cut -d ' ' -f 1 | tr -d ':')"
                         data_line "Encrypted" \
-                        "${device_name} ${2}(${encryption_method})${N}" \
-                        "${1}" "${2}" "${3}" 
+                                "${device_name} ${2}(${encryption_method})${N}" \
+                                "${1}" "${2}" "${3}"
                 fi
         done
 }
@@ -496,7 +501,7 @@ function display_SELinux()
         SELinux_total="${SELinux_state} ${SELinux_policy}"
 
         if [[ "${opt_a}" -eq 1 ]]; then
-                SELinux_total="$(anonymize_data ${SELinux_total})"
+                SELinux_total="$(anonymize_data "${SELinux_total}")"
         fi
 
         data_line "SELinux" "${SELinux_total}" "${1}" "${2}" "${3}"
@@ -510,7 +515,7 @@ function display_fs_usage()
         [[ $(command -v df) ]] || return
 
         local _mountpoint
-        local bar_complete bar_empty bar_filled
+        local bar bar_empty bar_filled
         local nb_block_empty nb_block_filled
         local total_length right_length
         local disk_usage disk_free_space
@@ -521,10 +526,10 @@ function display_fs_usage()
         total_length="${4}"
 
         for i in $(command lsblk -no MOUNTPOINTS | grep -v '^$'); do
-                disk_usage="$(command df ${i} |
-                awk 'NR==2 { print $5 }' | sed 's/%//')"
+                disk_usage="$(command df "${i}" \
+                        | awk 'NR==2 { print $5 }' | sed 's/%//')"
 
-                disk_free_space="$(command df ${i} | awk 'NR==2 { print $4 }')"
+                disk_free_space="$(command df "${i}" | awk 'NR==2 { print $4 }')"
 
                 # Convert to GB
                 disk_free_space=$(awk "BEGIN { 
@@ -536,24 +541,24 @@ function display_fs_usage()
                         i="...${i: -$((mountpoint_length_max - 3))}"
                 fi
 
-                right_length=$((total_length - ${#i} + 2))
+                right_length=$((total_length - ${#i}))
                 printf "  %b" "${1}${i}${N}"
 
                 msg="$(printf "%b: %.2fGB, %b: %b%%" "Free space" \
-                "${disk_free_space}" "Used" "${disk_usage}")"
+                        "${disk_free_space}" "Used" "${disk_usage}")"
 
                 msg_colored="$(printf "%b: ${C2}%.2f${N}GB, %b: ${C3}%b%%${N}" \
-                "Free space" "${disk_free_space}" "Used" "${disk_usage}")"
+                        "Free space" "${disk_free_space}" "Used" "${disk_usage}")"
 
                 msg_diff=$((${#msg_colored} - ${#msg}))
 
                 printf "%$((right_length + msg_diff))b\n" "${msg_colored}"
 
                 if [[ "${disk_usage}" -gt 90 ]]; then
-                        # Normally RED 
+                        # Normally RED
                         color="${C1}"
                 elif [[ "${disk_usage}" -gt 70 ]]; then
-                        # Normally YELLOW 
+                        # Normally YELLOW
                         color="${C3}"
                 else
                         # Normally GREEN
@@ -563,12 +568,12 @@ function display_fs_usage()
                 nb_block_filled=$((disk_usage * total_length / 100))
                 nb_block_empty=$((total_length - nb_block_filled))
 
-                bar_filled="$(printf "%*s" "${nb_block_filled}" | tr ' ' '|')"
-                bar_empty="$(printf "%*s" "${nb_block_empty}" | tr ' ' ' ')"
+                bar_filled="$(printf "%*s" "${nb_block_filled}" | sed 's/ /▀/g')"
+                bar_empty="$(printf "%*s" "${nb_block_empty}" | sed 's/ /▀/g')"
 
-                bar="${color}${bar_filled}${N}${bar_empty}"
+                bar="${color}${bar_filled}${C0}${bar_empty}${N}"
 
-                printf "  [%b]\n" "${bar}"
+                printf "  %b\n" "${bar}"
         done
 }
 
@@ -579,7 +584,7 @@ function display_disks_temp()
         [[ $(command -v lsblk) ]] || return
 
         local disks counter temp
-        disks="$(lsblk -do NAME | grep -E '^[a-z0-9]+$')"
+        disks="$(lsblk -dno NAME)"
         counter=0
 
         # Indentation
@@ -587,11 +592,11 @@ function display_disks_temp()
 
         for i in ${disks[@]}; do
                 if [[ "${i}" =~ ^nvme.* ]]; then
-                        temp="$(smartctl --all /dev/${i} |
-                        awk '/Temperature:/ { print $2 }')"
+                        temp="$(smartctl --all "/dev/${i}" \
+                                | awk '/Temperature:/ { print $2 }')"
                 else
-                        temp="$(smartctl --all /dev/${i} |
-                        awk '/Temperature/ { print $10 }')"
+                        temp="$(smartctl --all "/dev/${i}" \
+                                | awk '/Temperature/ { print $10 }')"
                 fi
 
                 # If temperature cannot be fetched, skip and do nothing
@@ -600,7 +605,7 @@ function display_disks_temp()
                 i="${1}${i}${N}"
                 temp="${2} ${temp}°C ${N}"
 
-if [[ "${counter}" -lt 3 ]]; then
+                if [[ "${counter}" -lt 3 ]]; then
                         printf "%b: %b " "${i}" "${temp}"
                         ((counter++))
                         if [[ "${counter}" -eq 3 ]]; then
@@ -670,8 +675,8 @@ function display_services()
 
         # If service exists, add it in another list
         for i in "${services_list[@]}"; do
-                if [[ $(systemctl list-units --type=service --all |
-                grep -io "${i}.service") ]]; then
+                if systemctl list-units --type=service --all \
+                        | grep -q "${i}.service"; then
                         present_services+=("${i}")
                 fi
         done
@@ -684,7 +689,7 @@ function display_services()
         max_length=40
 
         for i in "${present_services[@]}"; do
-                pre_state="$(systemctl is-active ${i}.service)"
+                pre_state="$(systemctl is-active "${i}".service)"
 
                 # Change color if service is up/down/failed
                 if [[ "${pre_state}" == "active" ]]; then
@@ -693,11 +698,11 @@ function display_services()
                         state_color="${C2}"
                 elif [[ "${pre_state}" == "inactive" ]]; then
                         post_state="(inactive)"
-                        # Normally YELLOW 
+                        # Normally YELLOW
                         state_color="${C3}"
                 elif [[ "${pre_state}" == "failed" ]]; then
                         post_state="(failed!)"
-                        # Normally RED 
+                        # Normally RED
                         state_color="${C1}"
                 fi
 
@@ -714,7 +719,7 @@ function display_services()
                 fi
 
                 printf "%b %b %b %${limit_length}s" "${dot}" "${i}" \
-                "${post_state}" " "
+                        "${post_state}" " "
 
                 ((counter++))
 
@@ -749,22 +754,20 @@ function display_docker_containers()
 
         local docker_ct_active docker_ct_exited
 
-        for i in $(docker ps --filter "status=running" --format "{{.Names}}")
-        do
+        for i in $(docker ps --filter "status=running" --format "{{.Names}}"); do
                 docker_ct_active+=("${i}")
         done
 
-        for i in $(docker ps --filter "status=exited" --format "{{.Names}}")
-        do
+        for i in $(docker ps --filter "status=exited" --format "{{.Names}}"); do
                 docker_ct_exited+=("${i}")
         done
 
         local dot state counter max_length
 
         counter=0
-        max_length=0
+        max_length=40
 
-        for i in ${docker_ct_active[@]}; do
+        for i in "${docker_ct_active[@]}"; do
                 state="(running)"
                 dot="${C6}●${N}"
                 limit_length=$((max_length - 1 - ${#i} - ${#state}))
@@ -776,8 +779,8 @@ function display_docker_containers()
                 fi
 
                 printf "%b %b %b %${limit_length}s" "${dot}" "${i}" \
-                "${state}" " "
-                
+                        "${state}" " "
+
                 ((counter++))
 
                 if [[ "${counter}" -eq 2 ]]; then
@@ -788,7 +791,7 @@ function display_docker_containers()
 
         counter=0
 
-        for i in ${docker_ct_exited[@]}; do
+        for i in "${docker_ct_exited[@]}"; do
                 state="(exited)"
                 dot="${C4}●${N}"
                 limit_length=$((max_length - 1 - ${#i} - ${#state}))
@@ -800,8 +803,8 @@ function display_docker_containers()
                 fi
 
                 printf "%b %b %b %${limit_length}s" "${dot}" "${i}" \
-                "${state}" " "
-                
+                        "${state}" " "
+
                 ((counter++))
 
                 if [[ "${counter}" -eq 2 ]]; then
